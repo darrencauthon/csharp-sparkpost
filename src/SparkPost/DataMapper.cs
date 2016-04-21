@@ -19,6 +19,9 @@ namespace SparkPost
         IDictionary<string, object> ToDictionary(InlineImage inlineImage);
         IDictionary<string, object> ToDictionary(File file);
         IDictionary<string, object> ToDictionary(Suppression suppression);
+        IDictionary<string, object> ToDictionary(Template template);
+        IDictionary<string, object> ToDictionary(TemplateContent templateContent);
+        IDictionary<string, object> ToDictionary(TemplateOptions templateOptions);
     }
 
     public class DataMapper : IDataMapper
@@ -85,6 +88,21 @@ namespace SparkPost
         public virtual IDictionary<string, object> ToDictionary(File file)
         {
             return WithCommonConventions(file);
+        }
+
+        public virtual IDictionary<string, object> ToDictionary(Template template)
+        {
+            return WithCommonConventions(template);
+        }
+
+        public virtual IDictionary<string, object> ToDictionary(TemplateContent templateContent)
+        {
+            return WithCommonConventions(templateContent);
+        }
+
+        public virtual IDictionary<string, object> ToDictionary(TemplateOptions templateOptions)
+        {
+            return WithCommonConventions(templateOptions);
         }
 
         private static bool AnyValuesWereSetOn(object target)
