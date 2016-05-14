@@ -128,6 +128,15 @@
     <Compile Include="ValueMappers\StringStringDictionaryValueMapper.cs" />
     <Compile Include="Webhook.cs" />
     <Compile Include="Webhooks.cs" />
+    <Compile Include="WebHooks\Content.cs" />
+    <Compile Include="WebHooks\GenEvent.cs" />
+    <Compile Include="WebHooks\GeoIp.cs" />
+    <Compile Include="WebHooks\MessageEvent.cs" />
+    <Compile Include="WebHooks\Msys.cs" />
+    <Compile Include="WebHooks\RelayEvent.cs" />
+    <Compile Include="WebHooks\RelayMessage.cs" />
+    <Compile Include="WebHooks\TrackEvent.cs" />
+    <Compile Include="WebHooks\UnsubscribeEvent.cs" />
     <Compile Include="WebHooks\WebHookEventData.cs" />
   </ItemGroup>
   <ItemGroup>
