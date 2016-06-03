@@ -1,12 +1,8 @@
-<a href="https://www.sparkpost.com"><img src="https://www.sparkpost.com/sites/default/files/attachments/SparkPost_Logo_2-Color_Gray-Orange_RGB.svg" width="200px"/></a>
+# C# Library for [SparkPost](https://www.sparkpost.com)
 
-[Sign up](https://app.sparkpost.com/sign-up?src=Dev-Website&sfdcid=70160000000pqBb) for a SparkPost account and visit our [Developer Hub](https://developers.sparkpost.com) for even more content.
+[![Travis CI](https://travis-ci.org/darrencauthon/csharp-sparkpost.svg?branch=master)](https://travis-ci.org/SparkPost/csharp-sparkpost)
 
-# SparkPost C# Library
-
-[![Travis CI](https://travis-ci.org/SparkPost/csharp-sparkpost.svg?branch=master)](https://travis-ci.org/SparkPost/csharp-sparkpost)  [![Slack Status](http://slack.sparkpost.com/badge.svg)](http://slack.sparkpost.com)
-
-The official C# package for the [SparkPost API](https://www.sparkpost.com/api). Xamarin.iOS and Xamarin.Android support provided in the Portable Package (PCL Profile7).
+A C# package for the [SparkPost API](https://developers.sparkpost.com/api). Xamarin.iOS and Xamarin.Android support provided in the Portable Package (PCL Profile7).
 
 ## Installation
 
@@ -107,7 +103,7 @@ The suppression list are users who have opted-out of your emails.  To retrieve t
 ```c#
 var client = new Client("MY_API_KEY");
 
-client.Suppressions.List(); // returns a list of 
+client.Suppressions.List(); // returns a list of
 
 client.Suppressions.List(new { limit = 3 }); // it accepts an anonymous type for filters
 
