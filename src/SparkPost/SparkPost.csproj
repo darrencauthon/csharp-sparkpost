@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;FRAMEWORK</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\SparkPost.xml</DocumentationFile>
@@ -364,11 +364,14 @@
     <Compile Include="..\SparkPost.NetCore\Utilities\Jsonification.cs">
       <Link>Utilities\Jsonification.cs</Link>
     </Compile>
-    <Compile Include="..\SparkPost.NetCore\Utilities\MailMessageMapping.cs">
-      <Link>Utilities\MailMessageMapping.cs</Link>
+    <Compile Include="..\SparkPost.NetCore\Utilities\MimeTypes.cs">
+      <Link>Utilities\MimeTypes.cs</Link>
     </Compile>
     <Compile Include="..\SparkPost.NetCore\Utilities\SnakeCase.cs">
       <Link>Utilities\SnakeCase.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Utilities\UrlUtility.cs">
+      <Link>Utilities\UrlUtility.cs</Link>
     </Compile>
     <Compile Include="..\SparkPost.NetCore\ValueMappers\AnonymousValueMapper.cs">
       <Link>ValueMappers\AnonymousValueMapper.cs</Link>
@@ -416,6 +419,7 @@
       <Link>Webhooks.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\MailMessageMapping.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

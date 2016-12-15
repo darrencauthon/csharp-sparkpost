@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Net.Mail;
 using SparkPost.Utilities;
+#if FRAMEWORK
+using System.Net.Mail;
+#endif
 
 namespace SparkPost
 {
@@ -33,6 +35,7 @@ namespace SparkPost
         public int NumFailedGeneration { get; set; }
         public int NumInvalidRecipients { get; set; }
 
+#if FRAMEWORK
         public static Transmission Parse(MailMessage message)
         {
             return MailMessageMapping.ToTransmission(message);
@@ -42,5 +45,6 @@ namespace SparkPost
         {
             MailMessageMapping.ToTransmission(message, this);
         }
+#endif
     }
 }
