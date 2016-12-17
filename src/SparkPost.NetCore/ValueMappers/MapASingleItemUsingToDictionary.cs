@@ -25,7 +25,7 @@ namespace SparkPost.ValueMappers
 
         public object Map(Type propertyType, object value)
         {
-#if FRAMEWORK
+#if NET45
             return converters[propertyType].Invoke(dataMapper, BindingFlags.Default, null,
                 new[] {value}, CultureInfo.CurrentCulture);
 #else

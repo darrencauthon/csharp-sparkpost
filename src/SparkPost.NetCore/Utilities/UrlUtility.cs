@@ -1,4 +1,4 @@
-﻿#if FRAMEWORK
+﻿#if NET45
 using System.Web;
 #else
 using System.Net;
@@ -10,7 +10,7 @@ namespace SparkPost.Utilities
     {
         public static string UrlEncode(string value)
         {
-#if FRAMEWORK
+#if NET45
             return HttpUtility.UrlEncode(value);
 #else
             return WebUtility.UrlEncode(value);

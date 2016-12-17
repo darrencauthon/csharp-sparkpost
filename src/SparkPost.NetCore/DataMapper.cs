@@ -223,7 +223,7 @@ namespace SparkPost
         {
             var converters = ToDictionaryMethods();
             if (converters.ContainsKey(anything.GetType()))
-#if FRAMEWORK
+#if NET45
                 return converters[anything.GetType()].Invoke(this, BindingFlags.Default, null,
                     new[] {anything}, CultureInfo.CurrentCulture) as IDictionary<string, object>;
 #else
