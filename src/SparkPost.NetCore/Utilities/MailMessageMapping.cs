@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET45
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -116,3 +117,4 @@ namespace SparkPost.Utilities
         }
     }
 }
+#endif

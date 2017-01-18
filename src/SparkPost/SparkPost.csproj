@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET45</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\SparkPost.xml</DocumentationFile>
@@ -52,129 +52,379 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
-    <Compile Include="Attributes.cs" />
-    <Compile Include="BounceCategory.cs" />
-    <Compile Include="BounceClass.cs" />
-    <Compile Include="BounceClassDetails.cs" />
-    <Compile Include="BounceClassesDetails.cs" />
-    <Compile Include="CreateSendingDomainResponse.cs" />
-    <Compile Include="Dkim.cs" />
-    <Compile Include="Dns.cs" />
-    <Compile Include="GetMetricsResponse.cs" />
-    <Compile Include="GetMetricsResourceResponse.cs" />
-    <Compile Include="GetSendingDomainResponse.cs" />
-    <Compile Include="IMessageEvents.cs" />
-    <Compile Include="IMetrics.cs" />
-    <Compile Include="IRecipientLists.cs" />
-    <Compile Include="ISendingDomains.cs" />
-    <Compile Include="IValueMapper.cs" />
-    <Compile Include="ListMessageEventsResponse.cs" />
-    <Compile Include="ListRelayWebhookResponse.cs" />
-    <Compile Include="ListInboundDomainResponse.cs" />
-    <Compile Include="ListSendingDomainResponse.cs" />
-    <Compile Include="MessageEvent.cs" />
-    <Compile Include="MessageEvents.cs" />
-    <Compile Include="MessageEventSampleResponse.cs" />
-    <Compile Include="MessageEventsQuery.cs" />
-    <Compile Include="MessageEventType.cs" />
-    <Compile Include="Metrics.cs" />
-    <Compile Include="MetricsQuery.cs" />
-    <Compile Include="MetricsField.cs" />
-    <Compile Include="MetricsResourceQuery.cs" />
-    <Compile Include="PageLink.cs" />
-    <Compile Include="RecipientList.cs" />
-    <Compile Include="RecipientLists.cs" />
-    <Compile Include="RetrieveRecipientListsResponse.cs" />
-    <Compile Include="RetrieveRelayWebhookResponse.cs" />
-    <Compile Include="InboundDomainResponse.cs" />
-    <Compile Include="RetrieveTemplatesResponse.cs" />
-    <Compile Include="SendingDomain.cs" />
-    <Compile Include="SendingDomains.cs" />
-    <Compile Include="SendingDomainStatus.cs" />
-    <Compile Include="SendRecipientListsResponse.cs" />
-    <Compile Include="UpdateRecipientListResponse.cs" />
-    <Compile Include="UpdateSendingDomainResponse.cs" />
-    <Compile Include="Utilities\Jsonification.cs" />
-    <Compile Include="Utilities\MailMessageMapping.cs" />
-    <Compile Include="Utilities\SnakeCase.cs" />
-    <Compile Include="ValueMappers\AnonymousValueMapper.cs" />
-    <Compile Include="ValueMappers\BooleanValueMapper.cs" />
-    <Compile Include="RequestSenders\AsyncRequestSender.cs" />
-    <Compile Include="Attachment.cs" />
-    <Compile Include="CcHandling.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="Content.cs" />
-    <Compile Include="CreateSubaccountResponse.cs" />
-    <Compile Include="DataMapper.cs" />
-    <Compile Include="File.cs" />
-    <Compile Include="IClient.cs" />
-    <Compile Include="InlineImage.cs" />
-    <Compile Include="IRequestMethod.cs" />
-    <Compile Include="ISubaccounts.cs" />
-    <Compile Include="ISuppressions.cs" />
-    <Compile Include="LeftRight.cs" />
-    <Compile Include="ListSubaccountResponse.cs" />
-    <Compile Include="ListSuppressionResponse.cs" />
-    <Compile Include="ITransmissions.cs" />
-    <Compile Include="ListTransmissionResponse.cs" />
-    <Compile Include="ListWebhookResponse.cs" />
-    <Compile Include="Options.cs" />
+    <Compile Include="..\SparkPost.NetCore\Address.cs">
+      <Link>Address.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Attachment.cs">
+      <Link>Attachment.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Attributes.cs">
+      <Link>Attributes.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\BounceCategory.cs">
+      <Link>BounceCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\BounceClass.cs">
+      <Link>BounceClass.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\BounceClassDetails.cs">
+      <Link>BounceClassDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\BounceClassesDetails.cs">
+      <Link>BounceClassesDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\CcHandling.cs">
+      <Link>CcHandling.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Client.cs">
+      <Link>Client.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Content.cs">
+      <Link>Content.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\CreateSendingDomainResponse.cs">
+      <Link>CreateSendingDomainResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\CreateSubaccountResponse.cs">
+      <Link>CreateSubaccountResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\CreateTemplateResponse.cs">
+      <Link>CreateTemplateResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\DataMapper.cs">
+      <Link>DataMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Dkim.cs">
+      <Link>Dkim.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Dns.cs">
+      <Link>Dns.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\File.cs">
+      <Link>File.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\GetMetricsResourceResponse.cs">
+      <Link>GetMetricsResourceResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\GetMetricsResponse.cs">
+      <Link>GetMetricsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\GetSendingDomainResponse.cs">
+      <Link>GetSendingDomainResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\IClient.cs">
+      <Link>IClient.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\IMessageEvents.cs">
+      <Link>IMessageEvents.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\IMetrics.cs">
+      <Link>IMetrics.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\InboundDomain.cs">
+      <Link>InboundDomain.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\InboundDomainResponse.cs">
+      <Link>InboundDomainResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\InboundDomains.cs">
+      <Link>InboundDomains.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\InlineImage.cs">
+      <Link>InlineImage.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\IRecipientLists.cs">
+      <Link>IRecipientLists.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\IRequestMethod.cs">
+      <Link>IRequestMethod.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ISendingDomains.cs">
+      <Link>ISendingDomains.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ISubaccounts.cs">
+      <Link>ISubaccounts.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ISuppressions.cs">
+      <Link>ISuppressions.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ITemplates.cs">
+      <Link>ITemplates.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ITransmissions.cs">
+      <Link>ITransmissions.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\IValueMapper.cs">
+      <Link>IValueMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\LeftRight.cs">
+      <Link>LeftRight.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ListInboundDomainResponse.cs">
+      <Link>ListInboundDomainResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ListMessageEventsResponse.cs">
+      <Link>ListMessageEventsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ListRelayWebhookResponse.cs">
+      <Link>ListRelayWebhookResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ListSendingDomainResponse.cs">
+      <Link>ListSendingDomainResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ListSubaccountResponse.cs">
+      <Link>ListSubaccountResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ListSuppressionResponse.cs">
+      <Link>ListSuppressionResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ListTransmissionResponse.cs">
+      <Link>ListTransmissionResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ListWebhookResponse.cs">
+      <Link>ListWebhookResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\MessageEvent.cs">
+      <Link>MessageEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\MessageEvents.cs">
+      <Link>MessageEvents.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\MessageEventSampleResponse.cs">
+      <Link>MessageEventSampleResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\MessageEventsQuery.cs">
+      <Link>MessageEventsQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\MessageEventType.cs">
+      <Link>MessageEventType.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Metrics.cs">
+      <Link>Metrics.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\MetricsField.cs">
+      <Link>MetricsField.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\MetricsQuery.cs">
+      <Link>MetricsQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\MetricsResourceQuery.cs">
+      <Link>MetricsResourceQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Options.cs">
+      <Link>Options.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\PageLink.cs">
+      <Link>PageLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Recipient.cs">
+      <Link>Recipient.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RecipientList.cs">
+      <Link>RecipientList.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RecipientLists.cs">
+      <Link>RecipientLists.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RecipientType.cs">
+      <Link>RecipientType.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RelayWebhook.cs">
+      <Link>RelayWebhook.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RelayWebhooks.cs">
+      <Link>RelayWebhooks.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Request.cs">
+      <Link>Request.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RequestMethodFinder.cs">
+      <Link>RequestMethodFinder.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RequestMethods\Delete.cs">
+      <Link>RequestMethods\Delete.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RequestMethods\Get.cs">
+      <Link>RequestMethods\Get.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RequestMethods\Post.cs">
+      <Link>RequestMethods\Post.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RequestMethods\Put.cs">
+      <Link>RequestMethods\Put.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RequestMethods\PutAndPostAreTheSame.cs">
+      <Link>RequestMethods\PutAndPostAreTheSame.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RequestMethods\RequestMethod.cs">
+      <Link>RequestMethods\RequestMethod.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RequestSenders\AsyncRequestSender.cs">
+      <Link>RequestSenders\AsyncRequestSender.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RequestSenders\RequestSender.cs">
+      <Link>RequestSenders\RequestSender.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RequestSenders\SyncRequestSender.cs">
+      <Link>RequestSenders\SyncRequestSender.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Response.cs">
+      <Link>Response.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ResponseException.cs">
+      <Link>ResponseException.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RetrieveRecipientListsResponse.cs">
+      <Link>RetrieveRecipientListsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RetrieveRelayWebhookResponse.cs">
+      <Link>RetrieveRelayWebhookResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RetrieveTemplateResponse.cs">
+      <Link>RetrieveTemplateResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RetrieveTemplatesResponse.cs">
+      <Link>RetrieveTemplatesResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RetrieveTransmissionResponse.cs">
+      <Link>RetrieveTransmissionResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\RetrieveWebhookResponse.cs">
+      <Link>RetrieveWebhookResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\SendingDomain.cs">
+      <Link>SendingDomain.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\SendingDomains.cs">
+      <Link>SendingDomains.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\SendingDomainStatus.cs">
+      <Link>SendingDomainStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\SendingModes.cs">
+      <Link>SendingModes.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\SendRecipientListsResponse.cs">
+      <Link>SendRecipientListsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\SendTransmissionResponse.cs">
+      <Link>SendTransmissionResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Subaccount.cs">
+      <Link>Subaccount.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\SubaccountCreate.cs">
+      <Link>SubaccountCreate.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Subaccounts.cs">
+      <Link>Subaccounts.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\SubaccountStatus.cs">
+      <Link>SubaccountStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\SubaccountUpdate.cs">
+      <Link>SubaccountUpdate.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Suppression.cs">
+      <Link>Suppression.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Suppressions.cs">
+      <Link>Suppressions.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\SuppressionsQuery.cs">
+      <Link>SuppressionsQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Template.cs">
+      <Link>Template.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\TemplateContent.cs">
+      <Link>TemplateContent.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\TemplateOptions.cs">
+      <Link>TemplateOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Templates.cs">
+      <Link>Templates.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Transmission.cs">
+      <Link>Transmission.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Transmissions.cs">
+      <Link>Transmissions.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\UpdateRecipientListResponse.cs">
+      <Link>UpdateRecipientListResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\UpdateSendingDomainResponse.cs">
+      <Link>UpdateSendingDomainResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\UpdateSubaccountResponse.cs">
+      <Link>UpdateSubaccountResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\UpdateSuppressionResponse.cs">
+      <Link>UpdateSuppressionResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Utilities\Jsonification.cs">
+      <Link>Utilities\Jsonification.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Utilities\MailMessageMapping.cs">
+      <Link>Utilities\MailMessageMapping.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Utilities\MimeTypes.cs">
+      <Link>Utilities\MimeTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Utilities\SnakeCase.cs">
+      <Link>Utilities\SnakeCase.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Utilities\UrlUtility.cs">
+      <Link>Utilities\UrlUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ValueMappers\AnonymousValueMapper.cs">
+      <Link>ValueMappers\AnonymousValueMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ValueMappers\BooleanValueMapper.cs">
+      <Link>ValueMappers\BooleanValueMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ValueMappers\DateTimeOffsetValueMapper.cs">
+      <Link>ValueMappers\DateTimeOffsetValueMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ValueMappers\DateTimeValueMapper.cs">
+      <Link>ValueMappers\DateTimeValueMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ValueMappers\EnumerableValueMapper.cs">
+      <Link>ValueMappers\EnumerableValueMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ValueMappers\EnumValueMapper.cs">
+      <Link>ValueMappers\EnumValueMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ValueMappers\MapASetOfItemsUsingToDictionary.cs">
+      <Link>ValueMappers\MapASetOfItemsUsingToDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ValueMappers\MapASingleItemUsingToDictionary.cs">
+      <Link>ValueMappers\MapASingleItemUsingToDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ValueMappers\StringObjectDictionaryValueMapper.cs">
+      <Link>ValueMappers\StringObjectDictionaryValueMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\ValueMappers\StringStringDictionaryValueMapper.cs">
+      <Link>ValueMappers\StringStringDictionaryValueMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\VerifySendingDomain.cs">
+      <Link>VerifySendingDomain.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\VerifySendingDomainResponse.cs">
+      <Link>VerifySendingDomainResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\VerifySendingDomainStatus.cs">
+      <Link>VerifySendingDomainStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Webhook.cs">
+      <Link>Webhook.cs</Link>
+    </Compile>
+    <Compile Include="..\SparkPost.NetCore\Webhooks.cs">
+      <Link>Webhooks.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Recipient.cs" />
-    <Compile Include="RecipientType.cs" />
-    <Compile Include="Request.cs" />
-    <Compile Include="RequestMethodFinder.cs" />
-    <Compile Include="RequestMethods\Delete.cs" />
-    <Compile Include="RequestMethods\Get.cs" />
-    <Compile Include="RequestMethods\Post.cs" />
-    <Compile Include="RequestMethods\Put.cs" />
-    <Compile Include="RequestMethods\PutAndPostAreTheSame.cs" />
-    <Compile Include="RequestMethods\RequestMethod.cs" />
-    <Compile Include="RequestSenders\RequestSender.cs" />
-    <Compile Include="Response.cs" />
-    <Compile Include="ResponseException.cs" />
-    <Compile Include="RetrieveTransmissionResponse.cs" />
-    <Compile Include="RetrieveWebhookResponse.cs" />
-    <Compile Include="SendingModes.cs" />
-    <Compile Include="SendTransmissionResponse.cs" />
-    <Compile Include="Subaccount.cs" />
-    <Compile Include="SubaccountCreate.cs" />
-    <Compile Include="Subaccounts.cs" />
-    <Compile Include="SubaccountStatus.cs" />
-    <Compile Include="SubaccountUpdate.cs" />
-    <Compile Include="Suppression.cs" />
-    <Compile Include="Suppressions.cs" />
-    <Compile Include="SuppressionsQuery.cs" />
-    <Compile Include="RequestSenders\SyncRequestSender.cs" />
-    <Compile Include="CreateTemplateResponse.cs" />
-    <Compile Include="ITemplates.cs" />
-    <Compile Include="RetrieveTemplateResponse.cs" />
-    <Compile Include="Template.cs" />
-    <Compile Include="TemplateContent.cs" />
-    <Compile Include="TemplateOptions.cs" />
-    <Compile Include="Templates.cs" />
-    <Compile Include="Transmission.cs" />
-    <Compile Include="Transmissions.cs" />
-    <Compile Include="UpdateSubaccountResponse.cs" />
-    <Compile Include="UpdateSuppressionResponse.cs" />
-    <Compile Include="ValueMappers\DateTimeOffsetValueMapper.cs" />
-    <Compile Include="ValueMappers\DateTimeValueMapper.cs" />
-    <Compile Include="ValueMappers\EnumerableValueMapper.cs" />
-    <Compile Include="ValueMappers\EnumValueMapper.cs" />
-    <Compile Include="ValueMappers\MapASetOfItemsUsingToDictionary.cs" />
-    <Compile Include="ValueMappers\MapASingleItemUsingToDictionary.cs" />
-    <Compile Include="ValueMappers\StringObjectDictionaryValueMapper.cs" />
-    <Compile Include="ValueMappers\StringStringDictionaryValueMapper.cs" />
-    <Compile Include="RelayWebhook.cs" />
-    <Compile Include="InboundDomain.cs" />
-    <Compile Include="VerifySendingDomain.cs" />
-    <Compile Include="VerifySendingDomainResponse.cs" />
-    <Compile Include="VerifySendingDomainStatus.cs" />
-    <Compile Include="Webhook.cs" />
-    <Compile Include="RelayWebhooks.cs" />
-    <Compile Include="InboundDomains.cs" />
-    <Compile Include="Webhooks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
