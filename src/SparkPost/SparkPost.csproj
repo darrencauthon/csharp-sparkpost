@@ -190,6 +190,9 @@
     <Compile Include="..\SparkPost.NetCore\MessageEvents.cs">
       <Link>MessageEvents.cs</Link>
     </Compile>
+    <Compile Include="..\SparkPost.NetCore\MessageEventSampleResponse.cs">
+      <Link>MessageEventSampleResponse.cs</Link>
+    </Compile>
     <Compile Include="..\SparkPost.NetCore\MessageEventsQuery.cs">
       <Link>MessageEventsQuery.cs</Link>
     </Compile>

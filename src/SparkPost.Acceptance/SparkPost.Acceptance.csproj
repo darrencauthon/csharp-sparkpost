@@ -52,6 +52,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageEvents.feature.cs">
+      <DependentUpon>MessageEvents.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MessageEventsSteps.cs" />
     <Compile Include="MetricsSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Metrics.feature.cs">
@@ -88,6 +94,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="MessageEvents.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MessageEvents.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Metrics.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -51,6 +51,25 @@ namespace SparkPost
             return listMessageEventsResponse;
         }
 
+        public async Task<MessageEventSampleResponse> SamplesOf(string events)
+        {
+            var request = new Request
+            {
+                Url = $"/api/{client.Version}/message-events/events/samples?events={events}",
+                Method = "GET"
+            };
+
+            var response = await requestSender.Send(request);
+            if (response.StatusCode != HttpStatusCode.OK) throw new ResponseException(response);
+
+            return new MessageEventSampleResponse
+            {
+                ReasonPhrase = response.ReasonPhrase,
+                StatusCode = response.StatusCode,
+                Content = response.Content,
+            };
+        }
+
         private static IEnumerable<PageLink> ConvertToLinks(dynamic page_links)
         {
             var links = new List<PageLink>();
