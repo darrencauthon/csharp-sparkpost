@@ -93,6 +93,7 @@
     <Compile Include="SendingDomains.cs" />
     <Compile Include="SendingDomainStatus.cs" />
     <Compile Include="SendRecipientListsResponse.cs" />
+    <Compile Include="SinkHandling.cs" />
     <Compile Include="UpdateRecipientListResponse.cs" />
     <Compile Include="UpdateSendingDomainResponse.cs" />
     <Compile Include="Utilities\Jsonification.cs" />
