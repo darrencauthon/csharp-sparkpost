@@ -221,9 +221,15 @@ namespace SparkPost.Tests
 
                 result.Count().ShouldEqual(1);
                 var resultAddress = result.Single()["address"].CastAs<IDictionary<string, object>>();
-                resultAddress["email"].ShouldEqual(expectedEmail);
-                if (expectedHeaderTo != null)
-                    resultAddress["header_to"].ShouldEqual(expectedHeaderTo);
+
+                foreach (var fieldToTest in new Dictionary<string, string>() {
+                        { "email", expectedEmail }, { "header_to", expectedHeaderTo} })
+                {
+                    if (fieldToTest.Value == null)
+                        resultAddress.ContainsKey(fieldToTest.Key).ShouldBeFalse();
+                    else
+                        resultAddress[fieldToTest.Key].ShouldEqual(fieldToTest.Value);
+                }
             }
 
             static object[] SinkifyCases =
@@ -256,7 +262,10 @@ namespace SparkPost.Tests
                     "bob@example.com.SINK.SPARKPOSTMAIL.COM",
                     "larry@example.com.sink.sparkpostmail.com"
                 },
-
+                new string[]
+                {
+                    null, null, null, null
+                },
             };
 
             [Test]
