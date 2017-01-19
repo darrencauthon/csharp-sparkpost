@@ -95,7 +95,7 @@ namespace SparkPost
 
             var result = WithCommonConventions(transmission, data);
 
-            //if something
+            if (transmission.Options.UseSink)
                 SinkHandling.AddSinkDomainToAddresses(result);
             CcHandling.SetAnyCCsInTheHeader(transmission, result);
 

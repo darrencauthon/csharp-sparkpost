@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SparkPost
 {
@@ -14,22 +12,29 @@ namespace SparkPost
         {
             if (result.ContainsKey("recipients"))
             {
-                var recipients = result["recipients"] as IEnumerable<IDictionary<string, object>>;
-                var addresses = recipients.Select(r => r["address"]).Cast<IDictionary<string, object>>();
-                foreach (var address in addresses)
+                var recipients = (result["recipients"] as IEnumerable<IDictionary<string, object>>).ToList();
+                foreach (var recipient in recipients)
                 {
-                    address["email"] = AddSinkDomainToAddress((string)address["email"]);
-                    address["header_to"] = AddSinkDomainToAddress((string)address["header_to"]);
+                    AddSinkDomainToAddress(recipient, "email");
+                    AddSinkDomainToAddress(recipient, "header_to");                                        
                 }
+                result["recipients"] = recipients;
             }
         }
 
-        private static string AddSinkDomainToAddress(string emailAddress)
+        private static void AddSinkDomainToAddress(IDictionary<string, object> recipient, string fieldName)
         {
-            if (!String.IsNullOrWhiteSpace(emailAddress) && !emailAddress.EndsWith(SINK_DOMAIN, true, null))
-                return emailAddress + SINK_DOMAIN;
-            else
-                return emailAddress;
+            if (recipient.ContainsKey("address"))
+            {
+                var address = recipient["address"] as IDictionary<string, object>;
+                if (address.ContainsKey(fieldName))
+                {
+                    var emailAddress = (string)address[fieldName];
+                    if (!String.IsNullOrWhiteSpace(emailAddress) && !emailAddress.EndsWith(SINK_DOMAIN, true, null))
+                        address[fieldName] = emailAddress + SINK_DOMAIN;
+
+                }
+            }
         }
     }
 }
