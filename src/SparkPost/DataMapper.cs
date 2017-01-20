@@ -131,8 +131,11 @@ namespace SparkPost
 
         public virtual IDictionary<string, object> ToDictionary(Options options)
         {
-            var result = WithCommonConventions(options);
-            result.Remove("use_sink");
+            var result = WithCommonConventions(options, new Dictionary<string, object>()
+            {
+                ["use_sink"] = null,
+            });
+            
             return result.Any() ? result : null;
         }
 
