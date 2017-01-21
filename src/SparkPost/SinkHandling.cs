@@ -13,28 +13,27 @@ namespace SparkPost
             if (result.ContainsKey("recipients"))
             {
                 var recipients = (result["recipients"] as IEnumerable<IDictionary<string, object>>).ToList();
-                foreach (var recipient in recipients)
+                foreach (var address in recipients
+                        .Where(r => r.ContainsKey("address"))
+                        .Select(r => r["address"])
+                        .Cast<IDictionary<string, object>>())
                 {
-                    AddSinkDomainToAddress(recipient, "email");
-                    AddSinkDomainToAddress(recipient, "header_to");                                        
+                    AddSinkDomainToAddress(address, "email");
+                    AddSinkDomainToAddress(address, "header_to");                                        
                 }
                 result["recipients"] = recipients;
             }
         }
 
-        private static void AddSinkDomainToAddress(IDictionary<string, object> recipient, string fieldName)
-        {
-            if (recipient.ContainsKey("address"))
+        private static void AddSinkDomainToAddress(IDictionary<string, object> address, string fieldName)
+        {            
+            if (address.ContainsKey(fieldName))
             {
-                var address = recipient["address"] as IDictionary<string, object>;
-                if (address.ContainsKey(fieldName))
-                {
-                    var emailAddress = (string)address[fieldName];
-                    if (!String.IsNullOrWhiteSpace(emailAddress) && !emailAddress.EndsWith(SINK_DOMAIN, true, null))
-                        address[fieldName] = emailAddress + SINK_DOMAIN;
+                var currentAddress = (string)address[fieldName];
+                if (!String.IsNullOrWhiteSpace(currentAddress) && !currentAddress.EndsWith(SINK_DOMAIN, true, null))
+                    address[fieldName] = currentAddress + SINK_DOMAIN;
 
-                }
-            }
+            }            
         }
     }
 }
