@@ -21,12 +21,12 @@ namespace SparkPost
         }
 
         public async Task<SendTransmissionResponse> Send(Transmission transmission)
-        {
+        {            
             var request = new Request
             {
                 Url = $"api/{client.Version}/transmissions",
                 Method = "POST",
-                Data = dataMapper.ToDictionary(transmission)
+                Data = dataMapper.ToDictionary(transmission, client.CustomSettings.SinkAllTransmissions)
             };
 
             var response = await requestSender.Send(request);

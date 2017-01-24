@@ -82,6 +82,7 @@ namespace SparkPost
             }
 
             public SendingModes SendingMode { get; set; }
+            public bool SinkAllTransmissions { get; set; }
 
             public HttpClient CreateANewHttpClient()
             {
