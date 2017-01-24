@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
+#if !NETSTANDARD1_6
 using System.Web;
+#endif
 using SparkPost.RequestSenders;
 using SparkPost.Utilities;
 
@@ -23,7 +25,7 @@ namespace SparkPost
         {
             var request = new Request
             {
-                Url = $"/api/{client.Version}/sending-domains", 
+                Url = $"/api/{client.Version}/sending-domains",
                 Method = "GET"
             };
 
@@ -37,7 +39,7 @@ namespace SparkPost
         {
             var request = new Request
             {
-                Url = $"/api/{client.Version}/sending-domains", 
+                Url = $"/api/{client.Version}/sending-domains",
                 Method = "POST",
                 Data = dataMapper.ToDictionary(sendingDomain)
             };
@@ -47,13 +49,13 @@ namespace SparkPost
 
             var result = Jsonification.DeserializeObject<dynamic>(response.Content).results;
             return result != null ? new CreateSendingDomainResponse
-                {
-                    ReasonPhrase = response.ReasonPhrase,
-                    StatusCode = response.StatusCode,
-                    Content = response.Content,
-                    Domain = result.domain,
-                    Dkim = Dkim.ConvertToDkim(result.dkim),
-                }
+            {
+                ReasonPhrase = response.ReasonPhrase,
+                StatusCode = response.StatusCode,
+                Content = response.Content,
+                Domain = result.domain,
+                Dkim = Dkim.ConvertToDkim(result.dkim),
+            }
                 : null;
         }
 
@@ -61,7 +63,7 @@ namespace SparkPost
         {
             var request = new Request
             {
-                Url = $"/api/{client.Version}/sending-domains/{sendingDomain.Domain}", 
+                Url = $"/api/{client.Version}/sending-domains/{sendingDomain.Domain}",
                 Method = "PUT",
                 Data = dataMapper.ToDictionary(sendingDomain)
             };
@@ -71,14 +73,14 @@ namespace SparkPost
 
             var result = Jsonification.DeserializeObject<dynamic>(response.Content).results;
             return result != null ? new UpdateSendingDomainResponse
-                {
-                    ReasonPhrase = response.ReasonPhrase,
-                    StatusCode = response.StatusCode,
-                    Content = response.Content,
-                    Domain = result.domain,
-                    TrackingDomain = result.tracking_domain,
-                    Dkim = Dkim.ConvertToDkim(result.dkim),
-                }
+            {
+                ReasonPhrase = response.ReasonPhrase,
+                StatusCode = response.StatusCode,
+                Content = response.Content,
+                Domain = result.domain,
+                TrackingDomain = result.tracking_domain,
+                Dkim = Dkim.ConvertToDkim(result.dkim),
+            }
                 : null;
         }
 
@@ -86,7 +88,7 @@ namespace SparkPost
         {
             var request = new Request
             {
-                Url = $"/api/{client.Version}/sending-domains/{domain}", 
+                Url = $"/api/{client.Version}/sending-domains/{domain}",
                 Method = "GET",
             };
 
@@ -114,7 +116,12 @@ namespace SparkPost
             if (response.StatusCode == HttpStatusCode.NoContent)
             {
                 response.StatusCode = HttpStatusCode.OK;
+#if NETSTANDARD1_6
+                response.ReasonPhrase = "OK";
+#else
                 response.ReasonPhrase = HttpWorkerRequest.GetStatusDescription((int)HttpStatusCode.OK);
+
+#endif
             }
 
             if (response.StatusCode != HttpStatusCode.OK) throw new ResponseException(response);

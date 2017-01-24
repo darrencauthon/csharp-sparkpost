@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace SparkPost.ValueMappers
 {
@@ -20,7 +21,11 @@ namespace SparkPost.ValueMappers
         public object Map(Type propertyType, object value)
         {
             var newValue = new Dictionary<string, object>();
+#if NETSTANDARD1_6
+            foreach (var property in value.GetType().GetRuntimeProperties())
+#else
             foreach (var property in value.GetType().GetProperties())
+#endif
                 newValue[property.Name] = property.GetValue(value);
             return dataMapper.GetTheValue(newValue.GetType(), newValue);
         }
