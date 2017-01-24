@@ -97,7 +97,7 @@ namespace SparkPost
 
             if (transmission.Options.UseSink)
                 SinkHandling.AddSinkDomainToAddresses(result);
-            CcHandling.SetAnyCCsInTheHeader(transmission, result);
+            CcHandling.Process(transmission, result);
 
             return result;
         }
