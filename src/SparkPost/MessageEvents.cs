@@ -112,7 +112,7 @@ namespace SparkPost
                     ErrorCode = result.error_code,
                     IpAddress = result.ip_address,
                     MessageId = result.message_id,
-                    MessageForm = result.msg_from,
+                    MessageFrom = result.msg_from,
                     MessageSize = result.msg_size,
                     NumberOfRetries = result.num_retries,
                     RecipientTo = result.rcpt_to,

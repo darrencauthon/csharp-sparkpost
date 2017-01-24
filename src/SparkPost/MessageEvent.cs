@@ -1,6 +1,7 @@
 ﻿using SparkPost.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace SparkPost
 {
@@ -132,7 +133,11 @@ namespace SparkPost
         /// },
         /// "msg_from": "msprvs1=17827RA6TC8Pz=bounces-12345@sparkpostmail1.com",
         /// </summary>
-        public string MessageForm { get; set; }
+        public string MessageFrom { get; set; }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [Obsolete("Use MessageEvent.MessageFrom.")]
+        public string MessageForm { get { return MessageFrom; } set { MessageFrom = value; } }
 
         /// <summary>
         /// "msg_size": {

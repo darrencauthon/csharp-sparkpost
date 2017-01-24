@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SparkPost</id>
-    <version>1.12.0</version>
+    <version>1.12.1</version>
     <title>SparkPost</title>
     <authors>Darren Cauthon</authors>
     <licenseUrl>https://github.com/SparkPost/csharp-sparkpost/blob/master/LICENSE.md</licenseUrl>
