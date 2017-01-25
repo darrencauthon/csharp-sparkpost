@@ -285,7 +285,7 @@ namespace SparkPost.Tests
                 resultAddress["email"]
                     .CastAs<string>()
                     .EndsWith(".sink.sparkpostmail.com")
-                    .ShouldNotEqual(shouldSinkify);
+                    .ShouldEqual(shouldSinkify);
             }
 
             [Test]
