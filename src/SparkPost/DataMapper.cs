@@ -86,7 +86,7 @@ namespace SparkPost
             return ToDictionary(transmission, false);
         }
 
-        public virtual IDictionary<string, object> ToDictionary(Transmission transmission, bool useSink)
+        public virtual IDictionary<string, object> ToDictionary(Transmission transmission, bool sink)
         {
             var data = new Dictionary<string, object>
             {
@@ -101,7 +101,7 @@ namespace SparkPost
 
             var result = WithCommonConventions(transmission, data);
 
-            if (useSink || transmission.Options.UseSink)
+            if (sink || transmission.Options.Sink)
                 SinkHandling.AddSinkDomainToAddresses(result);
             CcHandling.Process(transmission, result);
 
@@ -139,7 +139,7 @@ namespace SparkPost
         {
             var result = WithCommonConventions(options, new Dictionary<string, object>()
             {
-                ["use_sink"] = null,
+                ["sink"] = null,
             });
             
             return result.Any() ? result : null;

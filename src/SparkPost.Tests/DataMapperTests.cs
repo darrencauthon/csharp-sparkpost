@@ -215,7 +215,7 @@ namespace SparkPost.Tests
             {
                 var address = new Address() { Email = email, HeaderTo = headerTo };
                 transmission.Recipients.Add(new Recipient() { Address = address });
-                transmission.Options.UseSink = true;
+                transmission.Options.Sink = true;
 
                 var result = mapper.ToDictionary(transmission)["recipients"] as IEnumerable<IDictionary<string, object>>;
 
@@ -277,7 +277,7 @@ namespace SparkPost.Tests
             {
                 var address = new Address() { Email = Guid.NewGuid().ToString() };
                 transmission.Recipients.Add(new Recipient() { Address = address });
-                transmission.Options.UseSink = transmissionUseSink;
+                transmission.Options.Sink = transmissionUseSink;
 
                 var result = mapper.ToDictionary(transmission, clientUseSink)["recipients"] as IEnumerable<IDictionary<string, object>>;
                 var resultAddress = result.Single()["address"].CastAs<IDictionary<string, object>>();
