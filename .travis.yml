@@ -1,5 +1,6 @@
 language: csharp
 solution: src/SparkPost.sln
+dotnet: 1.0.0-preview2-003121
 before_install:
   - sudo apt-get install nunit-console
 before_script:
