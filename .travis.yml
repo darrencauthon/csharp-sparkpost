@@ -19,5 +19,5 @@ matrix:
       before_script:
         - nuget restore src/SparkPost.sln
       script:
-        - xbuild /p:Configuration=Release src/SparkPost.sln
+        - xbuild /p:Configuration=ReleaseNet45 src/SparkPost.sln
         - nunit-console src/SparkPost.Tests/bin/Release/SparkPost.Tests.dll

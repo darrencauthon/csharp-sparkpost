@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.12.0-*",
     "buildOptions": {
         "compile": {
@@ -14,10 +14,16 @@
       }
     },
     "Release": {
-      "buildOptions": {
-        "define": [ "TRACE" ],
-        "optimize": true
-      }
+        "buildOptions": {
+            "define": [ "TRACE" ],
+            "optimize": true
+        }
+    },
+    "ReleaseNet45": {
+        "buildOptions": {
+            "define": [ "TRACE" ],
+            "optimize": true
+        }
     }
   },
   "frameworks": {
