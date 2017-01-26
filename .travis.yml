@@ -20,4 +20,4 @@ matrix:
         - nuget restore src/SparkPost.sln
       script:
         - xbuild /p:Configuration=ReleaseNet45 src/SparkPost.sln
-        - nunit-console src/SparkPost.Tests/bin/Release/SparkPost.Tests.dll
+        - nunit-console src/SparkPost.Tests/bin/ReleaseNet45/SparkPost.Tests.dll
