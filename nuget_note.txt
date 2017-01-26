@@ -1,6 +1,6 @@
 Bump the version:
 
-vim src/SparkPost/SparkPost.nuspec
+vim src/SparkPost.nuspec
 
 vim src/SparkPost/Properties/AssemblyInfo.cs
 
@@ -10,4 +10,4 @@ Open Visual Studio, clean the solution, then build a new Release Build.
 
 Build the nuget package:
 
-nuget pack src/SparkPost/SparkPost.csproj -Prop Configuration=Release
+nuget pack src/SparkPost.nuspec

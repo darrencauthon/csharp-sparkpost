@@ -14,11 +14,20 @@
     <copyright>Copyright 2016</copyright>
     <tags>email</tags>
     <dependencies>
-      <dependency id="Newtonsoft.Json" version="(6.0,)" />
+      <group targetFramework="net45">
+        <dependency id="Newtonsoft.Json" version="(6.0,)" />
+      </group>
+      <group targetFramework="netstandard1.6">
+        <dependency id="NETStandard.Library" version="1.6.0" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="System.Reflection.TypeExtensions" version="4.3.0" />
+      </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="bin/Release/SparkPost.dll" target="lib/net45" />
-    <file src="bin/Release/SparkPost.xml" target="lib/net45" />
+    <file src="SparkPost/bin/Release/SparkPost.dll" target="lib/net45" />
+    <file src="SparkPost/bin/Release/SparkPost.xml" target="lib/net45" />
+    <file src="SparkPost.NetStandard/bin/Release/netstandard1.6/SparkPost.dll" target="lib/netstandard1.6" />
+    <file src="SparkPost.NetStandard/bin/Release/netstandard1.6/SparkPost.xml" target="lib/netstandard1.6" />
   </files>
 </package>
