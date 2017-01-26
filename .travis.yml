@@ -1,5 +1,6 @@
 language: csharp
 solution: src/SparkPost.sln
+mono: none
 dotnet: 1.0.0-preview2-003121
 before_install:
   - sudo apt-get install nunit-console
@@ -8,4 +9,4 @@ before_script:
   - dotnet restore src/SparkPost.Dotnet
 script:
   - xbuild /p:Configuration=Release src/SparkPost.sln
-  - nunit-console /home/travis/build/darrencauthon/csharp-sparkpost/src/SparkPost.Tests/bin/Release/SparkPost.Tests.dll
+  - nunit-console src/SparkPost.Tests/bin/Release/SparkPost.Tests.dll
