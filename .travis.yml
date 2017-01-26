@@ -4,6 +4,7 @@ before_install:
   - sudo apt-get install nunit-console
 before_script:
   - nuget restore src/SparkPost.sln
+  - dotnet restore src/SparkPost.Dotnet
 script:
   - xbuild /p:Configuration=Release src/SparkPost.sln
   - nunit-console /home/travis/build/darrencauthon/csharp-sparkpost/src/SparkPost.Tests/bin/Release/SparkPost.Tests.dll
