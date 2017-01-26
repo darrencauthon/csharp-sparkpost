@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-#if NET45
+#if !NETSTANDARD1_6
 using System.Net.Mail;
 #endif
 using SparkPost.Utilities;
@@ -35,7 +35,7 @@ namespace SparkPost
         public int NumFailedGeneration { get; set; }
         public int NumInvalidRecipients { get; set; }
 
-#if NET45
+#if !NETSTANDARD1_6
         public static Transmission Parse(MailMessage message)
         {
             return MailMessageMapping.ToTransmission(message);

@@ -25,11 +25,11 @@ namespace SparkPost.ValueMappers
 
         public object Map(Type propertyType, object value)
         {
-#if NET45
+#if NETSTANDARD1_6
+            return converters[propertyType].Invoke(dataMapper, new[] { value });
+#else
             return converters[propertyType].Invoke(dataMapper, BindingFlags.Default, null,
                 new[] {value}, CultureInfo.CurrentCulture);
-#else
-            return converters[propertyType].Invoke(dataMapper, new[] { value });
 #endif
         }
     }

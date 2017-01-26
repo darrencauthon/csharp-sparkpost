@@ -223,11 +223,11 @@ namespace SparkPost
         {
             var converters = ToDictionaryMethods();
             if (converters.ContainsKey(anything.GetType()))
-#if NET45
+#if NETSTANDARD1_6
+            return converters[anything.GetType()].Invoke(this, new[] { anything }) as IDictionary<string, object>;
+#else
                 return converters[anything.GetType()].Invoke(this, BindingFlags.Default, null,
                     new[] {anything}, CultureInfo.CurrentCulture) as IDictionary<string, object>;
-#else
-            return converters[anything.GetType()].Invoke(this, new[] { anything }) as IDictionary<string, object>;
 #endif
             return WithCommonConventions(anything);
         }

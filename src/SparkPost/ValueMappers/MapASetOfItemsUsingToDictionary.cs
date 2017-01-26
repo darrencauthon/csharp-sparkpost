@@ -32,11 +32,11 @@ namespace SparkPost.ValueMappers
             var list = (value as IEnumerable<object>).ToList();
 
             if (list.Any())
-#if NET45
+#if NETSTANDARD1_6
+            value = list.Select(x => converter.Invoke(dataMapper, new[] { x })).ToList();
+#else
                 value = list.Select(x => converter.Invoke(dataMapper, BindingFlags.Default, null,
                     new[] {x}, CultureInfo.CurrentCulture)).ToList();
-#else
-            value = list.Select(x => converter.Invoke(dataMapper, new[] { x })).ToList();
 #endif
             else
                 value = null;
