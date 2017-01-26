@@ -8,7 +8,7 @@ matrix:
       dist: trusty
       solution: src/SparkPost.Dotnet.sln
       sudo: required
-      before_script:
+      script:
         - dotnet restore src/SparkPost.Dotnet/SparkPost.Dotnet
 
     - mono: latest
