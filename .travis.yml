@@ -9,7 +9,7 @@ matrix:
       solution: src/SparkPost.Dotnet.sln
       sudo: required
       before_script:
-        - dotnet restore src/SparkPost.Dotnet
+        - dotnet restore src/SparkPost.Dotnet/SparkPost.Dotnet
 
     - mono: latest
       solution: src/SparkPost.sln
