@@ -85,7 +85,8 @@ namespace SparkPost
                 {
                     ClickTracking = results.options.click_tracking,
                     OpenTracking = results.options.open_tracking,
-                    Transactional = (results.options.transactional == null) ? null : results.options.transactional
+                    Transactional = (results.options.transactional == null) ? null : results.options.transactional,
+                    Sandbox = results.options.sandbox
                 },
                 TemplateContent = new TemplateContent()
                 {
