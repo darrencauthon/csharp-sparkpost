@@ -20,13 +20,18 @@ namespace SparkPost.ValueMappers
 
         public bool CanMap(Type propertyType, object value)
         {
-            return propertyType != typeof (int) && converters.ContainsKey(propertyType);
+            return propertyType != typeof(int) && converters.ContainsKey(propertyType);
         }
 
         public object Map(Type propertyType, object value)
         {
-            return converters[propertyType].Invoke(dataMapper, BindingFlags.Default, null,
+#if NETSTANDARD1_6
+            return converters[propertyType].Invoke(dataMapper, new[] { value });
+#else
+              return converters[propertyType].Invoke(dataMapper, BindingFlags.Default, null,
                 new[] {value}, CultureInfo.CurrentCulture);
+#endif
+
         }
     }
 }

@@ -21,19 +21,32 @@ namespace SparkPost.ValueMappers
         public bool CanMap(Type propertyType, object value)
         {
             return value != null && propertyType.Name.EndsWith("List`1") &&
-                   propertyType.GetGenericArguments().Count() == 1 &&
+#if NETSTANDARD1_6
+                  propertyType.GenericTypeArguments.Count() == 1 &&
+                   converters.ContainsKey(propertyType.GenericTypeArguments.First());
+#else
+                  propertyType.GetGenericArguments().Count() == 1 &&
                    converters.ContainsKey(propertyType.GetGenericArguments().First());
+#endif
         }
 
         public object Map(Type propertyType, object value)
         {
+#if NETSTANDARD1_6
+            var converter = converters[propertyType.GenericTypeArguments.First()];
+#else
             var converter = converters[propertyType.GetGenericArguments().First()];
+#endif
 
             var list = (value as IEnumerable<object>).ToList();
 
             if (list.Any())
-                value = list.Select(x => converter.Invoke(dataMapper, BindingFlags.Default, null,
+#if NETSTANDARD1_6
+                value = list.Select(x => converter.Invoke(dataMapper,new[] {x})).ToList();
+#else
+              value = list.Select(x => converter.Invoke(dataMapper, BindingFlags.Default, null,
                     new[] {x}, CultureInfo.CurrentCulture)).ToList();
+#endif
             else
                 value = null;
 

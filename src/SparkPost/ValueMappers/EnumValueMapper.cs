@@ -1,4 +1,7 @@
 ﻿using System;
+#if NETSTANDARD1_6
+using System.Reflection;
+#endif
 
 namespace SparkPost.ValueMappers
 {
@@ -6,7 +9,11 @@ namespace SparkPost.ValueMappers
     {
         public bool CanMap(Type propertyType, object value)
         {
+#if NETSTANDARD1_6
+            return propertyType.GetTypeInfo().IsEnum;
+#else
             return propertyType.IsEnum;
+#endif
         }
 
         public object Map(Type propertyType, object value)

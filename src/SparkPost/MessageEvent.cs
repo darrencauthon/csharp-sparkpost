@@ -26,7 +26,11 @@ namespace SparkPost
                 foreach (var typeName in Enum.GetNames(typeof(MessageEventType)))
                 {
                     var typeNameSnakeCase = SnakeCase.Convert(typeName);
+#if NETSTANDARD1_6
+                    if (string.Equals(Type, typeNameSnakeCase, StringComparison.OrdinalIgnoreCase))
+#else
                     if (string.Equals(Type, typeNameSnakeCase, StringComparison.InvariantCultureIgnoreCase))
+#endif
                         // check for an unmapped message event type here
                         return (MessageEventType)Enum.Parse(typeof(MessageEventType), typeName);
                 }

@@ -89,7 +89,7 @@ namespace SparkPost
                         ? transmission.SubstitutionData
                         : null,
                 ["recipients"] = transmission.ListId != null
-                    ? (object) new Dictionary<string, object> {["list_id"] = transmission.ListId}
+                    ? (object)new Dictionary<string, object> { ["list_id"] = transmission.ListId }
                     : transmission.Recipients.Select(ToDictionary)
             };
 
@@ -223,15 +223,23 @@ namespace SparkPost
         {
             var converters = ToDictionaryMethods();
             if (converters.ContainsKey(anything.GetType()))
-                return converters[anything.GetType()].Invoke(this, BindingFlags.Default, null,
-                    new[] {anything}, CultureInfo.CurrentCulture) as IDictionary<string, object>;
+#if NETSTANDARD1_6
+                return converters[anything.GetType()].Invoke(this,new[] { anything }) as IDictionary<string, object>;
+#else
+            return converters[anything.GetType()].Invoke(this, BindingFlags.Default, null,
+                    new[] { anything }, CultureInfo.CurrentCulture) as IDictionary<string, object>;
+#endif
             return WithCommonConventions(anything);
         }
 
         public IDictionary<Type, MethodInfo> ToDictionaryMethods()
         {
+#if NETSTANDARD1_6
+            return this.GetType().GetRuntimeMethods()
+#else
             return this.GetType().GetMethods()
-                .Where(x => x.Name == "ToDictionary")
+#endif
+           .Where(x => x.Name == "ToDictionary")
                 .Where(x => x.GetParameters().Length == 1)
                 .Select(x => new
                 {
@@ -243,9 +251,16 @@ namespace SparkPost
 
         private static bool AnyValuesWereSetOn(object target)
         {
+#if NETSTANDARD1_6
             return target.GetType()
+                .GetRuntimeProperties()
+                .Any(x => x.GetValue(target) != null);
+#else
+             return target.GetType()
                 .GetProperties()
                 .Any(x => x.GetValue(target) != null);
+#endif
+
         }
 
         private static IDictionary<string, object> RemoveNulls(IDictionary<string, object> dictionary)
@@ -259,7 +274,11 @@ namespace SparkPost
         {
             if (target == null) return null;
             if (results == null) results = new Dictionary<string, object>();
+#if NETSTANDARD1_6
+            foreach (var property in target.GetType().GetRuntimeProperties())
+#else
             foreach (var property in target.GetType().GetProperties())
+#endif
             {
                 var name = SnakeCase.Convert(property.Name);
                 if (results.ContainsKey(name)) continue;
@@ -281,10 +300,13 @@ namespace SparkPost
             var data = new Dictionary<string, object>
             {
                 ["recipients"] = recipientList.Recipients.Select(ToDictionary),
-                ["attributes"] = recipientList.Attributes != null 
-                ? (object)new Dictionary<string, object> {
-                                              ["internal_id"] = recipientList.Attributes.InternalId
-                                            , ["list_group_id"] = recipientList.Attributes.ListGroupId } : null
+                ["attributes"] = recipientList.Attributes != null
+                ? (object)new Dictionary<string, object>
+                {
+                    ["internal_id"] = recipientList.Attributes.InternalId
+                                            ,
+                    ["list_group_id"] = recipientList.Attributes.ListGroupId
+                } : null
             };
             var result = WithCommonConventions(recipientList, data);
             return result;

@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+#if !NETSTANDARD1_6
 using System.Web;
+#endif
 using SparkPost.RequestSenders;
 using SparkPost.Utilities;
 
@@ -54,7 +56,11 @@ namespace SparkPost
         {
             var request = new Request
             {
+#if NETSTANDARD1_6
+                Url = $"/api/{client.Version}/suppression-list/{System.Net.WebUtility.UrlEncode(email)}",
+#else
                 Url = $"/api/{client.Version}/suppression-list/{HttpUtility.UrlEncode(email)}",
+#endif
                 Method = "GET"
             };
 
@@ -113,7 +119,11 @@ namespace SparkPost
         {
             var request = new Request
             {
+#if NETSTANDARD1_6
+                Url = $"api/{client.Version}/suppression-list/{System.Net.WebUtility.UrlEncode(email)}",
+#else
                 Url = $"api/{client.Version}/suppression-list/{HttpUtility.UrlEncode(email)}",
+#endif
                 Method = "DELETE"
             };
 
