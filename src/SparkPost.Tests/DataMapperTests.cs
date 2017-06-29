@@ -209,6 +209,85 @@ namespace SparkPost.Tests
                     ["email"].ShouldEqual(recipient2.Address.Email);
             }
 
+            [TestCaseSource("SinkifyCases")]
+            public void It_should_sinkify_addresses(string email, string headerTo,
+                    string expectedEmail, string expectedHeaderTo)
+            {
+                var address = new Address() { Email = email, HeaderTo = headerTo };
+                transmission.Recipients.Add(new Recipient() { Address = address });
+                transmission.Options.Sink = true;
+
+                var result = mapper.ToDictionary(transmission)["recipients"] as IEnumerable<IDictionary<string, object>>;
+
+                result.Count().ShouldEqual(1);
+                var resultAddress = result.Single()["address"].CastAs<IDictionary<string, object>>();
+
+                foreach (var fieldToTest in new Dictionary<string, string>() {
+                        { "email", expectedEmail }, { "header_to", expectedHeaderTo} })
+                {
+                    if (fieldToTest.Value == null)
+                        resultAddress.ContainsKey(fieldToTest.Key).ShouldBeFalse();
+                    else
+                        resultAddress[fieldToTest.Key].ShouldEqual(fieldToTest.Value);
+                }
+            }
+
+            static object[] SinkifyCases =
+            {
+                new string[]
+                {
+                    "bob@example.com",
+                    "larry@example.com",
+                    "bob@example.com.sink.sparkpostmail.com",
+                    "larry@example.com.sink.sparkpostmail.com"
+                },
+                new string[]
+                {
+                    "bob@example.com",
+                    null,
+                    "bob@example.com.sink.sparkpostmail.com",
+                    null
+                },
+                new string[]
+                {
+                    "bob@example.com.sink.sparkpostmail.com",
+                    "larry@example.com",
+                    "bob@example.com.sink.sparkpostmail.com",
+                    "larry@example.com.sink.sparkpostmail.com"
+                },
+                new string[]
+                {
+                    "bob@example.com.SINK.SPARKPOSTMAIL.COM",
+                    "larry@example.com",
+                    "bob@example.com.SINK.SPARKPOSTMAIL.COM",
+                    "larry@example.com.sink.sparkpostmail.com"
+                },
+                new string[]
+                {
+                    null, null, null, null
+                },
+            };
+
+            [TestCase(true, true, true)]
+            [TestCase(true, false, true)]
+            [TestCase(false, true, true)]
+            [TestCase(false, false, false)]
+            public void Client_sink_setting_should_override_transmission(bool clientUseSink, 
+                    bool transmissionUseSink, bool shouldSinkify)
+            {
+                var address = new Address() { Email = Guid.NewGuid().ToString() };
+                transmission.Recipients.Add(new Recipient() { Address = address });
+                transmission.Options.Sink = transmissionUseSink;
+
+                var result = mapper.ToDictionary(transmission, clientUseSink)["recipients"] as IEnumerable<IDictionary<string, object>>;
+                var resultAddress = result.Single()["address"].CastAs<IDictionary<string, object>>();
+
+                resultAddress["email"]
+                    .CastAs<string>()
+                    .EndsWith(".sink.sparkpostmail.com")
+                    .ShouldEqual(shouldSinkify);
+            }
+
             [Test]
             public void It_should_set_the_recipients_to_a_list_id_if_a_list_id_is_provided()
             {

@@ -16,6 +16,7 @@ namespace SparkPost
         IDictionary<string, object> ToDictionary(SendingDomainStatus sendingDomainStatus);
         IDictionary<string, object> ToDictionary(VerifySendingDomain verifySendingDomain);
         IDictionary<string, object> ToDictionary(Transmission transmission);
+        IDictionary<string, object> ToDictionary(Transmission transmission, bool useSink);
         IDictionary<string, object> ToDictionary(Recipient recipient);
         IDictionary<string, object> ToDictionary(Address address);
         IDictionary<string, object> ToDictionary(Options options);
@@ -82,6 +83,11 @@ namespace SparkPost
 
         public virtual IDictionary<string, object> ToDictionary(Transmission transmission)
         {
+            return ToDictionary(transmission, false);
+        }
+
+        public virtual IDictionary<string, object> ToDictionary(Transmission transmission, bool sink)
+        {
             var data = new Dictionary<string, object>
             {
                 ["substitution_data"] =
@@ -95,6 +101,8 @@ namespace SparkPost
 
             var result = WithCommonConventions(transmission, data);
 
+            if (sink || transmission.Options.Sink)
+                SinkHandling.AddSinkDomainToAddresses(result);
             CcHandling.Process(transmission, result);
 
             return result;
@@ -129,7 +137,12 @@ namespace SparkPost
 
         public virtual IDictionary<string, object> ToDictionary(Options options)
         {
-            return AnyValuesWereSetOn(options) ? WithCommonConventions(options) : null;
+            var result = WithCommonConventions(options, new Dictionary<string, object>()
+            {
+                ["sink"] = null,
+            });
+            
+            return result.Any() ? result : null;
         }
 
         public virtual IDictionary<string, object> ToDictionary(Content content)
