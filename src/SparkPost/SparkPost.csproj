@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\SparkPost.xml</DocumentationFile>
@@ -33,6 +33,17 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\SparkPost.xml</DocumentationFile>
     <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseNet45|AnyCPU'">
+    <OutputPath>bin\ReleaseNet45\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\SparkPost.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>1591</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -97,7 +108,9 @@
     <Compile Include="UpdateSendingDomainResponse.cs" />
     <Compile Include="Utilities\Jsonification.cs" />
     <Compile Include="Utilities\MailMessageMapping.cs" />
+    <Compile Include="Utilities\MimeTypes.cs" />
     <Compile Include="Utilities\SnakeCase.cs" />
+    <Compile Include="Utilities\UrlUtility.cs" />
     <Compile Include="ValueMappers\AnonymousValueMapper.cs" />
     <Compile Include="ValueMappers\BooleanValueMapper.cs" />
     <Compile Include="RequestSenders\AsyncRequestSender.cs" />

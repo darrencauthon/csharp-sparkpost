@@ -1,0 +1,39 @@
+{
+  "version": "1.12.0-*",
+    "buildOptions": {
+        "compile": {
+            "include": [ "../SparkPost/**/*.cs" ]
+        },
+        "warningsAsErrors": false,
+        "outputName": "SparkPost"
+    },
+  "configurations": {
+    "Debug": {
+      "buildOptions": {
+        "define": [ "DEBUG", "TRACE" ]
+      }
+    },
+    "Release": {
+        "buildOptions": {
+            "define": [ "TRACE" ],
+            "optimize": true
+        }
+    },
+    "ReleaseNet45": {
+        "buildOptions": {
+            "define": [ "TRACE" ],
+            "optimize": true
+        }
+    }
+  },
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore5.0"
+    }
+  },
+    "dependencies": {
+        "NETStandard.Library": "1.6.0",
+        "Newtonsoft.Json": "9.0.1",
+        "System.Reflection.TypeExtensions": "4.3.0"
+    }
+}

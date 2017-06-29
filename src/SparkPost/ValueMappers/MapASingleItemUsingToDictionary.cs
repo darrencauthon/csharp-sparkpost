@@ -25,8 +25,12 @@ namespace SparkPost.ValueMappers
 
         public object Map(Type propertyType, object value)
         {
+#if NETSTANDARD1_6
+            return converters[propertyType].Invoke(dataMapper, new[] { value });
+#else
             return converters[propertyType].Invoke(dataMapper, BindingFlags.Default, null,
                 new[] {value}, CultureInfo.CurrentCulture);
+#endif
         }
     }
 }
