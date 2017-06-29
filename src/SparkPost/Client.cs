@@ -8,6 +8,8 @@ namespace SparkPost
     {
         private const string defaultApiHost = "https://api.sparkpost.com";
 
+        public HttpClient HttpClient { get; set; }
+
         public Client(string apiKey) : this(apiKey, defaultApiHost, 0)
         {
 
@@ -30,7 +32,8 @@ namespace SparkPost
             SubaccountId = subAccountId;
 
             var dataMapper = new DataMapper(Version);
-            var asyncRequestSender = new AsyncRequestSender(this, dataMapper);
+
+            var asyncRequestSender = new AsyncRequestSender(dataMapper, TheWayToGetTheHttpClient());
             var syncRequestSender = new SyncRequestSender(asyncRequestSender);
             var requestSender = new RequestSender(asyncRequestSender, syncRequestSender, this);
 
@@ -94,5 +97,23 @@ namespace SparkPost
             }
         }
 
+        private Func<HttpClient> TheWayToGetTheHttpClient()
+        {
+            return () =>
+            {
+                if (HttpClient != null) return HttpClient;
+
+                HttpClient = BuildANewHttpClient();
+
+                return HttpClient;
+            };
+        }
+
+        private HttpClient BuildANewHttpClient()
+        {
+            var httpClient = CustomSettings.CreateANewHttpClient();
+            new HttpClientPreparation(this).Prepare(httpClient);
+            return httpClient;
+        }
     }
 }

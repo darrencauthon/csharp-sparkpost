@@ -64,6 +64,7 @@
     <Compile Include="GetMetricsResponse.cs" />
     <Compile Include="GetMetricsResourceResponse.cs" />
     <Compile Include="GetSendingDomainResponse.cs" />
+    <Compile Include="HttpClientPreparation.cs" />
     <Compile Include="IMessageEvents.cs" />
     <Compile Include="IMetrics.cs" />
     <Compile Include="IRecipientLists.cs" />

@@ -28,6 +28,8 @@ namespace SparkPost.Tests.RequestSenders
 
                 httpClient = new HttpClient();
 
+                Mocker.SetInstance(httpClient);
+
                 apiHost = "http://test.com";
                 apiKey = Guid.NewGuid().ToString();
 
@@ -74,64 +76,11 @@ namespace SparkPost.Tests.RequestSenders
                 result.Content.ShouldEqual(content);
             }
 
-            [Test]
-            public async void It_should_pass_the_api_key()
-            {
-                Subject.SetupTheResponseWith((r, h) =>
-                {
-                    h.DefaultRequestHeaders.Authorization.ToString().ShouldEqual(apiKey);
-                    return defaultHttpResponseMessage;
-                });
-
-                await Subject.Send(request);
-            }
-
-            [Test]
-            public async void It_should_send_the_request_to_the_appropriate_host()
-            {
-                Subject.SetupTheResponseWith((r, h) =>
-                {
-                    h.BaseAddress.ToString().ShouldEqual(apiHost + "/");
-                    return defaultHttpResponseMessage;
-                });
-
-                await Subject.Send(request);
-            }
-
-            [Test]
-            public async void It_should_set_the_subaccount_when_the_subaccount_is_not_zero()
-            {
-                Mocked<IClient>().Setup(x => x.SubaccountId).Returns(345);
-                Subject.SetupTheResponseWith((r, h) =>
-                {
-                    var match = h.DefaultRequestHeaders.First(x => x.Key == "X-MSYS-SUBACCOUNT");
-                    match.Value.Count().ShouldEqual(1);
-                    match.Value.First().ShouldEqual("345");
-                    return defaultHttpResponseMessage;
-                });
-
-                await Subject.Send(request);
-            }
-
-            [Test]
-            public async void It_should_NOT_set_a_subaccount_when_the_subaccount_is_zero()
-            {
-                Mocked<IClient>().Setup(x => x.SubaccountId).Returns(0);
-                Subject.SetupTheResponseWith((r, h) =>
-                {
-                    var count = h.DefaultRequestHeaders.Count(x => x.Key == "X-MSYS-SUBACCOUNT");
-                    count.ShouldEqual(0);
-                    return defaultHttpResponseMessage;
-                });
-
-                await Subject.Send(request);
-            }
-
             public class AsyncTesting : AsyncRequestSender
             {
                 private Func<Request, HttpClient, HttpResponseMessage> responseBuilder;
 
-                public AsyncTesting(IClient client) : base(client, null)
+                public AsyncTesting(IClient client, Func<HttpClient> httpClient) : base(null, httpClient)
                 {
                 }
 

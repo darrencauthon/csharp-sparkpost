@@ -119,6 +119,7 @@
     <Compile Include="RequestSenders\SyncRequestSenderTests.cs" />
     <Compile Include="TransmissionTests.cs" />
     <Compile Include="SubaccountTest.cs" />
+    <Compile Include="Utilities\HttpClientPreparationTests.cs" />
     <Compile Include="Utilities\SnakeCaseTests.cs" />
     <Compile Include="RelayWebhookTests.cs" />
     <Compile Include="WebhookTests.cs" />
