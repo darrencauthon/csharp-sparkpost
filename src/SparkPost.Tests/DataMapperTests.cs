@@ -83,6 +83,16 @@ namespace SparkPost.Tests
             }
 
             [Test]
+            public void do_not_alter_the_metadata_keys()
+            {
+                var key = "PascalKey";
+                var value = Guid.NewGuid().ToString();
+                recipient.Metadata[key] = value;
+                mapper.ToDictionary(recipient)["metadata"]
+                    .CastAs<IDictionary<string, object>>()[key].ShouldEqual(value);
+            }
+
+            [Test]
             public void do_not_include_empty_metadata()
             {
                 mapper.ToDictionary(recipient).Keys.ShouldNotContain("metadata");
