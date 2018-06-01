@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMoq.Helpers;
 using NUnit.Framework;
-using Should;
+using Shouldly;
 using SparkPost.RequestSenders;
 
 namespace SparkPost.Tests.RequestSenders
@@ -46,7 +46,7 @@ namespace SparkPost.Tests.RequestSenders
             }
 
             [Test]
-            public async void It_should_return_the_http_response_message_info()
+            public async Task It_should_return_the_http_response_message_info()
             {
                 var content = Guid.NewGuid().ToString();
                 Subject.SetupTheResponseWith((r, h) => new HttpResponseMessage(HttpStatusCode.Accepted)
@@ -55,12 +55,12 @@ namespace SparkPost.Tests.RequestSenders
                 });
 
                 var result = await Subject.Send(request);
-                result.StatusCode.ShouldEqual(HttpStatusCode.Accepted);
-                result.Content.ShouldEqual(content);
+                result.StatusCode.ShouldBe(HttpStatusCode.Accepted);
+                result.Content.ShouldBe(content);
             }
 
             [Test]
-            public async void It_should_return_the_http_response_message_info_take_2()
+            public async Task It_should_return_the_http_response_message_info_take_2()
             {
                 var content = Guid.NewGuid().ToString();
                 Subject.SetupTheResponseWith((r, h) => new HttpResponseMessage(HttpStatusCode.NotFound)
@@ -69,17 +69,17 @@ namespace SparkPost.Tests.RequestSenders
                 });
 
                 var result = await Subject.Send(request);
-                result.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
-                result.ReasonPhrase.ShouldEqual("Not Found");
-                result.Content.ShouldEqual(content);
+                result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
+                result.ReasonPhrase.ShouldBe("Not Found");
+                result.Content.ShouldBe(content);
             }
 
             [Test]
-            public async void It_should_pass_the_api_key()
+            public async Task It_should_pass_the_api_key()
             {
                 Subject.SetupTheResponseWith((r, h) =>
                 {
-                    h.DefaultRequestHeaders.Authorization.ToString().ShouldEqual(apiKey);
+                    h.DefaultRequestHeaders.Authorization.ToString().ShouldBe(apiKey);
                     return defaultHttpResponseMessage;
                 });
 
@@ -87,11 +87,11 @@ namespace SparkPost.Tests.RequestSenders
             }
 
             [Test]
-            public async void It_should_send_the_request_to_the_appropriate_host()
+            public async Task It_should_send_the_request_to_the_appropriate_host()
             {
                 Subject.SetupTheResponseWith((r, h) =>
                 {
-                    h.BaseAddress.ToString().ShouldEqual(apiHost + "/");
+                    h.BaseAddress.ToString().ShouldBe(apiHost + "/");
                     return defaultHttpResponseMessage;
                 });
 
@@ -99,14 +99,14 @@ namespace SparkPost.Tests.RequestSenders
             }
 
             [Test]
-            public async void It_should_set_the_subaccount_when_the_subaccount_is_not_zero()
+            public async Task It_should_set_the_subaccount_when_the_subaccount_is_not_zero()
             {
                 Mocked<IClient>().Setup(x => x.SubaccountId).Returns(345);
                 Subject.SetupTheResponseWith((r, h) =>
                 {
                     var match = h.DefaultRequestHeaders.First(x => x.Key == "X-MSYS-SUBACCOUNT");
-                    match.Value.Count().ShouldEqual(1);
-                    match.Value.First().ShouldEqual("345");
+                    match.Value.Count().ShouldBe(1);
+                    match.Value.First().ShouldBe("345");
                     return defaultHttpResponseMessage;
                 });
 
@@ -114,13 +114,13 @@ namespace SparkPost.Tests.RequestSenders
             }
 
             [Test]
-            public async void It_should_NOT_set_a_subaccount_when_the_subaccount_is_zero()
+            public async Task It_should_NOT_set_a_subaccount_when_the_subaccount_is_zero()
             {
                 Mocked<IClient>().Setup(x => x.SubaccountId).Returns(0);
                 Subject.SetupTheResponseWith((r, h) =>
                 {
                     var count = h.DefaultRequestHeaders.Count(x => x.Key == "X-MSYS-SUBACCOUNT");
-                    count.ShouldEqual(0);
+                    count.ShouldBe(0);
                     return defaultHttpResponseMessage;
                 });
 
