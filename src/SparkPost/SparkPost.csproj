@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFrameworks>netstandard1.6;net45</TargetFrameworks>
+    <AssemblyVersion>1.14.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,7 +10,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 
 </Project>

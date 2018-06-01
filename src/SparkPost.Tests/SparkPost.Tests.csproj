@@ -1,16 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFrameworks>netcoreapp2.0;net45</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.7.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="Moq" Version="4.8.2" />
+    <PackageReference Include="NUnit" Version="3.9.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />
     <PackageReference Include="Shouldly" Version="2.8.3" />
+    <PackageReference Include="AutoMoq" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SparkPost\SparkPost.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 
 </Project>

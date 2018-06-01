@@ -19,10 +19,10 @@ namespace SparkPost.Tests.Utilities
         [Test]
         public void It_should_handle_harder_strings()
         {
-            SnakeCase.Convert("TestTesting").ShouldEqual("test_testing");
-            SnakeCase.Convert("TestingTest").ShouldEqual("testing_test");
-            SnakeCase.Convert("ApppppAppppppp").ShouldEqual("appppp_appppppp");
-            SnakeCase.Convert("ApppppppAppppp").ShouldEqual("appppppp_appppp");
+            SnakeCase.Convert("TestTesting").ShouldBe("test_testing");
+            SnakeCase.Convert("TestingTest").ShouldBe("testing_test");
+            SnakeCase.Convert("ApppppAppppppp").ShouldBe("appppp_appppppp");
+            SnakeCase.Convert("ApppppppAppppp").ShouldBe("appppppp_appppp");
         }
 
         [Test]
