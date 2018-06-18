@@ -110,6 +110,7 @@ namespace SparkPost
             return WithCommonConventions(recipient, new Dictionary<string, object>()
             {
                 ["type"] = null,
+                ["metadata"] = AlterThisDictionaryToBePassedToSparkpost(recipient.Metadata),
                 ["substitution_data"] =
                     recipient.SubstitutionData != null && recipient.SubstitutionData.Keys.Any()
                         ? recipient.SubstitutionData
