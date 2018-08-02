@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using SparkPost.RequestSenders;
 using SparkPost.Utilities;
@@ -79,6 +80,7 @@ namespace SparkPost
                 httpClientBuilder = () =>
                 {
                     var httpClient = new HttpClient();
+                    System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     return httpClient;
                 };
