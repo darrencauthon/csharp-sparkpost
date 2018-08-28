@@ -147,5 +147,25 @@ namespace SparkPost
             var response = await requestSender.Send(request);
             return response.StatusCode == HttpStatusCode.OK;
         }
+
+        public async Task<bool> Update(string templateId, Template template, bool? updatePublished = null)
+        {
+            var request = new Request
+            {
+                Url = $"api/{client.Version}/templates/{templateId}",
+                Method = "PUT",
+                Data = dataMapper.ToDictionary(template)
+            };
+
+            if (updatePublished != null)
+            {
+                string updatePublishedValue = updatePublished.ToString().ToLower();
+                request.Url += $"?update_published={updatePublishedValue}";
+            }
+
+            var response = await requestSender.Send(request);
+            if (response.StatusCode != HttpStatusCode.OK) throw new ResponseException(response);
+            return true;
+        }
     }
 }
