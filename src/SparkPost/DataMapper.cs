@@ -34,6 +34,7 @@ namespace SparkPost
         IDictionary<Type, MethodInfo> ToDictionaryMethods();
         IDictionary<string, object> ToDictionary(RecipientList recipientList);
         IDictionary<string, object> ToDictionary(Template template);
+        IDictionary<string, object> ToDictionary(TemplateUpdate template);
         IDictionary<string, object> ToDictionary(TemplateContent templateContent);
         IDictionary<string, object> ToDictionary(TemplateOptions templateOptions);
         IDictionary<string, object> ToDictionary(MetricsQuery query);
@@ -210,6 +211,11 @@ namespace SparkPost
         }
 
         public virtual IDictionary<string, object> ToDictionary(Template template)
+        {
+            return WithCommonConventions(template);
+        }
+
+        public virtual IDictionary<string, object> ToDictionary(TemplateUpdate template)
         {
             return WithCommonConventions(template);
         }

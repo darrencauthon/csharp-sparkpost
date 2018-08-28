@@ -30,9 +30,9 @@ namespace SparkPost
         /// Updates an email template.
         /// </summary>
         /// <param name="templateId">The id of the template to update.</param>
-        /// <param name="template">The properties of the template to update. Exclude ID from update</param>
+        /// <param name="template">The properties of the template to update (exclude ID from update)</param>
         /// <param name="updatePublished">If true, updates the most recent published template. If the query param is not passed or set to false, it will result in an update to the draft version.</param>
         /// <returns>The response from the API.</returns>
-        Task<bool> Update(string templateId, Template template, bool? updatePublished = null);
+        Task<bool> Update(string templateId, TemplateUpdate template, bool? updatePublished = null);
     }
 }

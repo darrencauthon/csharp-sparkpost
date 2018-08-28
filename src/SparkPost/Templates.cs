@@ -148,7 +148,7 @@ namespace SparkPost
             return response.StatusCode == HttpStatusCode.OK;
         }
 
-        public async Task<bool> Update(string templateId, Template template, bool? updatePublished = null)
+        public async Task<bool> Update(string templateId, TemplateUpdate template, bool? updatePublished = null)
         {
             var request = new Request
             {
