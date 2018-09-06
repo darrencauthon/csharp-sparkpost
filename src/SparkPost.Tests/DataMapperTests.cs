@@ -614,6 +614,15 @@ namespace SparkPost.Tests
             }
 
             [Test]
+            public void ab_test_id()
+            {
+                var value = Guid.NewGuid().ToString();
+                content.AbTestId = value;
+                mapper.ToDictionary(content)["ab_test_id"].ShouldEqual(value);
+            }
+
+
+            [Test]
             public void html()
             {
                 var value = Guid.NewGuid().ToString();
