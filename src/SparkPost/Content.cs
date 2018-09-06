@@ -22,5 +22,7 @@ namespace SparkPost
         public IList<InlineImage> InlineImages { get; set; }
         public string TemplateId { get; set; }
         public bool? UseDraftTemplate { get; set; }
+
+        public string AbTestId { get; set; }
     }
 }
