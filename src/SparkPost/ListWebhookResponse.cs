@@ -31,6 +31,7 @@ namespace SparkPost
                 Id = r.id,
                 Name = r.name,
                 Target = r.target,
+                CustomHeaders = r.custom_headers,
                 Events = events,
                 AuthType = r.auth_type,
                 AuthRequestDetails = r.auth_request_details,

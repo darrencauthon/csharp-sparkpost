@@ -13,6 +13,7 @@ namespace SparkPost
         public string Id { get; set; }
         public string Name { get; set; }
         public string Target { get; set; }
+        public object CustomHeaders { get; set; }
         public IList<string> Events { get; set; }
 
         public DateTime? LastSuccessful { get; set; }

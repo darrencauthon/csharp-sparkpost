@@ -885,6 +885,22 @@ namespace SparkPost.Tests
             }
 
             [Test]
+            public void CustomHeaders()
+            {
+                var webhook = new Webhook
+                {
+                    CustomHeaders = new
+                    {
+                        XAPIKey = "abcd"
+                    }
+                };
+
+                var dictionary = dataMapper.ToDictionary(webhook);
+                var customHeadersDetails = dictionary["custom_headers"].CastAs<IDictionary<string, object>>();
+                customHeadersDetails["x-api-key"].ShouldEqual("abcd");
+            }
+
+            [Test]
             public void AuthType()
             {
                 var webhook = new Webhook {AuthType = Guid.NewGuid().ToString()};
