@@ -81,6 +81,8 @@ namespace SparkPost
                 Published = results.published,
                 LastUpdateTime = results.last_update_time,
                 LastUse = (results.last_use == null) ? null : results.last_use,
+                HasDraft = results.has_draft,
+                HasPublished = results.has_published,
                 Options = new TemplateOptions()
                 {
                     ClickTracking = results.options.click_tracking,
@@ -124,7 +126,9 @@ namespace SparkPost
                     Name = result.name,
                     LastUpdateTime = result.last_update_time,
                     Description = result.description,
-                    Published = result.published
+                    Published = result.published,
+                    HasDraft = result.has_draft,
+                    HasPublished = result.has_published
                 });
 
             return new RetrieveTemplatesResponse
