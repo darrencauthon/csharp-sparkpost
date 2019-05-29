@@ -27,5 +27,7 @@ namespace SparkPost
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Published { get; set; }
+        public bool HasDraft { get; set; }
+        public bool HasPublished { get; set; }
     }
 }

@@ -9,11 +9,11 @@ namespace SparkPost
 {
     public class Templates : ITemplates
     {
-        private readonly Client client;
+        private readonly IClient client;
         private readonly IRequestSender requestSender;
-        private readonly DataMapper dataMapper;
+        private readonly IDataMapper dataMapper;
 
-        public Templates(Client client, RequestSender requestSender, DataMapper dataMapper)
+        public Templates(IClient client, IRequestSender requestSender, IDataMapper dataMapper)
         {
             this.client = client;
             this.requestSender = requestSender;
@@ -32,14 +32,24 @@ namespace SparkPost
             var response = await requestSender.Send(request);
             if (response.StatusCode != HttpStatusCode.OK) throw new ResponseException(response);
 
-            var results = JsonConvert.DeserializeObject<dynamic>(response.Content).results;
-            return new CreateTemplateResponse()
+            var createTemplateResponse = new CreateTemplateResponse()
             {
-                Id = results.id,
                 ReasonPhrase = response.ReasonPhrase,
                 StatusCode = response.StatusCode,
                 Content = response.Content
             };
+
+            try
+            {
+                var results = JsonConvert.DeserializeObject<dynamic>(response.Content).results;
+                createTemplateResponse.Id = results.Id;
+            }
+            catch
+            {
+                // ignored.
+            }
+
+            return createTemplateResponse;
         }
 
         public async Task<RetrieveTemplateResponse> Retrieve(string templateId, bool? draft = null)
@@ -60,7 +70,7 @@ namespace SparkPost
             if (response.StatusCode != HttpStatusCode.OK) throw new ResponseException(response);
 
             var results = JsonConvert.DeserializeObject<dynamic>(response.Content).results;
-            
+
             Dictionary<string, string> Headers = new Dictionary<string, string>();
             if (results.content.headers != null)
             {
@@ -81,6 +91,8 @@ namespace SparkPost
                 Published = results.published,
                 LastUpdateTime = results.last_update_time,
                 LastUse = (results.last_use == null) ? null : results.last_use,
+                HasDraft = results.has_draft,
+                HasPublished = results.has_published,
                 Options = new TemplateOptions()
                 {
                     ClickTracking = results.options.click_tracking,
@@ -124,7 +136,9 @@ namespace SparkPost
                     Name = result.name,
                     LastUpdateTime = result.last_update_time,
                     Description = result.description,
-                    Published = result.published
+                    Published = result.published,
+                    HasDraft = result.has_draft,
+                    HasPublished = result.has_published
                 });
 
             return new RetrieveTemplatesResponse
@@ -146,6 +160,26 @@ namespace SparkPost
 
             var response = await requestSender.Send(request);
             return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        public async Task<bool> Update(string templateId, Template template, bool? updatePublished = null)
+        {
+            var request = new Request
+            {
+                Url = $"api/{client.Version}/templates/{templateId}",
+                Method = "PUT",
+                Data = dataMapper.ToDictionary(template)
+            };
+
+            if (updatePublished != null)
+            {
+                string updatePublishedValue = updatePublished.ToString().ToLower();
+                request.Url += $"?update_published={updatePublishedValue}";
+            }
+
+            var response = await requestSender.Send(request);
+            if (response.StatusCode != HttpStatusCode.OK) throw new ResponseException(response);
+            return true;
         }
     }
 }
