@@ -117,6 +117,7 @@
     <Compile Include="RequestSenders\RequestSenderTests.cs" />
     <Compile Include="SuppressionTests.cs" />
     <Compile Include="RequestSenders\SyncRequestSenderTests.cs" />
+    <Compile Include="TemplateTests.cs" />
     <Compile Include="TransmissionTests.cs" />
     <Compile Include="SubaccountTest.cs" />
     <Compile Include="Utilities\SnakeCaseTests.cs" />

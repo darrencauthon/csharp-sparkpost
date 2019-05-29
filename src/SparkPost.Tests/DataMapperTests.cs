@@ -1307,5 +1307,56 @@ namespace SparkPost.Tests
                 Assert.That(dict["limit"].CastTo<int>(), Is.EqualTo(r));
             }
         }
+
+        [TestFixture]
+        public class TemplateMappingTests
+        {
+            private DataMapper _mapper;
+            private Template _template;
+
+            [SetUp]
+            public void Setup()
+            {
+                _template = new Template();
+                _mapper = new DataMapper("v1");
+            }
+
+            [Test]
+            public void has_draft()
+            {
+                bool hasDraftValue = false;
+                _template.HasDraft = hasDraftValue;
+                var dict = _mapper.ToDictionary(_template);
+                Assert.AreEqual(hasDraftValue, dict["has_draft"]);
+            }
+
+            [Test]
+            public void has_published()
+            {
+                bool value = true;
+                _template.HasPublished = value;
+                var dict = _mapper.ToDictionary(_template);
+                Assert.AreEqual(value, dict["has_published"]);
+            }
+
+            [Test]
+            public void has_option_click_tracking()
+            {
+                bool value = true;
+                _template.Options.ClickTracking = value;
+                var dict = _mapper.ToDictionary(_template);
+                var optionsDict = (Dictionary<string, object>)dict["options"];
+                Assert.AreEqual(value, optionsDict["click_tracking"]);
+            }
+
+            [Test]
+            [ExpectedException(typeof(KeyNotFoundException))]
+            public void has_option_click_tracking_null()
+            {
+                var dict = _mapper.ToDictionary(_template);
+                var optionsDict = (Dictionary<string, object>)dict["options"];
+                Assert.AreEqual(true, optionsDict["click_tracking"]);
+            }
+        }
     }
 }
