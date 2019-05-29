@@ -9,11 +9,11 @@ namespace SparkPost
 {
     public class Templates : ITemplates
     {
-        private readonly Client client;
+        private readonly IClient client;
         private readonly IRequestSender requestSender;
-        private readonly DataMapper dataMapper;
+        private readonly IDataMapper dataMapper;
 
-        public Templates(Client client, RequestSender requestSender, DataMapper dataMapper)
+        public Templates(IClient client, IRequestSender requestSender, IDataMapper dataMapper)
         {
             this.client = client;
             this.requestSender = requestSender;
@@ -32,14 +32,24 @@ namespace SparkPost
             var response = await requestSender.Send(request);
             if (response.StatusCode != HttpStatusCode.OK) throw new ResponseException(response);
 
-            var results = JsonConvert.DeserializeObject<dynamic>(response.Content).results;
-            return new CreateTemplateResponse()
+            var createTemplateResponse = new CreateTemplateResponse()
             {
-                Id = results.id,
                 ReasonPhrase = response.ReasonPhrase,
                 StatusCode = response.StatusCode,
                 Content = response.Content
             };
+
+            try
+            {
+                var results = JsonConvert.DeserializeObject<dynamic>(response.Content).results;
+                createTemplateResponse.Id = results.Id;
+            }
+            catch
+            {
+                // ignored.
+            }
+
+            return createTemplateResponse;
         }
 
         public async Task<RetrieveTemplateResponse> Retrieve(string templateId, bool? draft = null)
@@ -60,7 +70,7 @@ namespace SparkPost
             if (response.StatusCode != HttpStatusCode.OK) throw new ResponseException(response);
 
             var results = JsonConvert.DeserializeObject<dynamic>(response.Content).results;
-            
+
             Dictionary<string, string> Headers = new Dictionary<string, string>();
             if (results.content.headers != null)
             {
