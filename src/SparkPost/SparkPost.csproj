@@ -8,13 +8,13 @@
     <Description>SparkPost API</Description>
     <Copyright>Copyright 2016</Copyright>
     <Deterministic>false</Deterministic>
-    <Version>1.14.1</Version>
-    <AssemblyVersion>1.14.1.*</AssemblyVersion>
-    <FileVersion>1.14.1.0</FileVersion>
+    <Version>1.14.3</Version>
+    <AssemblyVersion>1.14.3.*</AssemblyVersion>
+    <FileVersion>1.14.3.0</FileVersion>
     <NoWarn>1591</NoWarn>
     <Authors>Darren Cauthon</Authors>
     <PackageIconUrl>https://www.sparkpost.com/sites/default/files/attachments/SparkPost_Logo_2-Color_Gray-Orange_RGB.svg</PackageIconUrl>
-    <PackageId>SparkPost</PackageId>
+    <PackageId>SparkPost.Combee</PackageId>
     <PackageProjectUrl>https://github.com/SparkPost/csharp-sparkpost</PackageProjectUrl>
     <PackageReleaseNotes>Added support to pass a user-agent.</PackageReleaseNotes>
     <PackageTags>email</PackageTags>
