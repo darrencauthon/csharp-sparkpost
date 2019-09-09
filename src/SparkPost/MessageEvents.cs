@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using SparkPost.RequestSenders;
+using SparkPost.Utilities;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using SparkPost.Utilities;
 
 namespace SparkPost
 {
@@ -19,18 +19,26 @@ namespace SparkPost
 
         public async Task<ListMessageEventsResponse> List()
         {
-            return await List(null);
+            return await List((MessageEventsQuery)null);
         }
 
-        public async Task<ListMessageEventsResponse> List(object messageEventsQuery)
+        public async Task<ListMessageEventsResponse> List(MessageEventsQuery messageEventsQuery)
         {
-            if (messageEventsQuery == null) messageEventsQuery = new { };
+            return await this.List($"/api/{client.Version}/events/message", messageEventsQuery);
+        }
 
+        public async Task<ListMessageEventsResponse> List(string url)
+        {
+            return await this.List(url, null);
+        }
+
+        public async Task<ListMessageEventsResponse> List(string url, MessageEventsQuery messageEventsQuery)
+        {
             var request = new Request
             {
-                Url = $"/api/{client.Version}/events/message",
+                Url = url,
                 Method = "GET",
-                Data = messageEventsQuery
+                Data = (object)messageEventsQuery ?? new { }
             };
 
             var response = await requestSender.Send(request);

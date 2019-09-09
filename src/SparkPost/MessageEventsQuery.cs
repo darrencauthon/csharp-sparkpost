@@ -1,7 +1,5 @@
-using SparkPost.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SparkPost
 {
@@ -58,16 +56,17 @@ namespace SparkPost
         public IList<string> MessageIds { get; set; }
 
         /// <summary>
-        /// page : number : The results page number to return. Used with per_page for paging through results.
-        /// Example: 25.
-        /// Default: 1.
+        /// cursor : String : Results cursor for pagination. Used in conjunction with per_page parameter. See Pagination section for details.
+        /// Example: WycyMDE4LTExLTA1VDIyOjQ1OjM5LjAwMFonLCAnc3BjLTM4MTQ1MjY3MjMyNTA2NTEwJ10=.
+        /// Default: initial.
         /// </summary>
-        public int? Page { get; set; }
+        public string Cursor { get; set; }
 
         /// <summary>
-        /// per_page : Number : Number of results to return per page. Must be between 1 and 10,000 (inclusive).
-        /// Example: 100.
+        /// per_page : Number : Maximum number of results to return per page. Must be between 1 and 10,000.
+        /// Example: 5000.
         /// Default: 1000.
+        /// Note: Pagination requests count towards the number of requests allowed by rate limiting, the same as non-paginated requests.
         /// </summary>
         public int? PerPage { get; set; }
 
