@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{A5DDA3E3-7B3D-46C3-B4BB-C627FBA37812}</ProjectGuid>
-    <TargetFramework>netstandard20</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyTitle>SparkPost</AssemblyTitle>
     <Company>SparkPost</Company>
     <Product>SparkPost</Product>
     <Description>SparkPost API</Description>
     <Copyright>Copyright 2016</Copyright>
     <Deterministic>false</Deterministic>
-    <Version>1.14.3</Version>
-    <AssemblyVersion>1.14.3.*</AssemblyVersion>
-    <FileVersion>1.14.3.0</FileVersion>
+    <Version>1.15.0</Version>
+    <AssemblyVersion>1.15.0.*</AssemblyVersion>
+    <FileVersion>1.15.0.0</FileVersion>
     <NoWarn>1591</NoWarn>
     <Authors>Darren Cauthon</Authors>
     <PackageIconUrl>https://www.sparkpost.com/sites/default/files/attachments/SparkPost_Logo_2-Color_Gray-Orange_RGB.svg</PackageIconUrl>
@@ -22,9 +22,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="MimeMapping" Version="1.0.1.14" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="MimeMapping" Version="1.0.1.26" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.md">
