@@ -3,7 +3,7 @@ pr: none
 
 variables:
   PackageName: Sparkpost.Combee
-  PackageVersion: 1.14.3
+  PackageVersion: 1.15.1
   PathToCsproj: src/SparkPost/SparkPost.csproj
 
 name: Pack'n'Push $(PackageName) $(PackageVersion) ($(Date:yyyy.MM.dd-HH.mm) r$(Rev:.r))
