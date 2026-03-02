@@ -12,7 +12,7 @@ jobs:
         with:
           dotnet-version: 6.0.301
       - run: dotnet run -p build/build.csproj
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: SparkPost.nupkg
           path: artifacts/*
